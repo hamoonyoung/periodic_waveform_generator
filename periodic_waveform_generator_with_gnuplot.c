@@ -94,11 +94,11 @@ int main(int argc, char ** argv)
 	gnuCommands[1] = "set xlabel \"x\"";
 	gnuCommands[2] = "set ylabel \"s(x)\"";
 	gnuCommands[3] = "set grid";
-	gnuCommands[4] = "plot 'data.dat' using 1:2 title 'f(x)' lt 5 lc 7 with lines";
+	gnuCommands[4] = "plot 'data.dat' using ($0/10.):1 title 'f(x)' w linesp";
 	
 
 	// generating and summing all the waveforms
-	for (int t = (points*length*-1); t < (points*length); t++)
+	for (int t = 0; t < (points*length); t++)
 	{
 		double y = 0.0;
 		for (int i=0; i < num_of_waves; i++){
@@ -112,8 +112,8 @@ int main(int argc, char ** argv)
 					break;		
 			}
 		}
-		fprintf(tempGraph, "%d\t%f\n", (int) t, (double) y);
-		//printf("%d\t%f\n", (int) t, (double) y);
+		fprintf(tempGraph, "%f\n", (double) y);
+		//printf("%f\n",(double) y);
 	}
 
 	// print via gnuplot
